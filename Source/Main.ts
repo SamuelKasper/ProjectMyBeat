@@ -65,7 +65,6 @@ namespace ProjectMyBeat {
         Buttons.resetColor(buttonML, 2);
         Buttons.resetColor(buttonMR, 2);
         Buttons.resetColor(buttonR, 1);
-        viewport.draw();
     }
 
 }

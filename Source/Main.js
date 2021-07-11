@@ -58,7 +58,6 @@ var ProjectMyBeat;
         ProjectMyBeat.Buttons.resetColor(ProjectMyBeat.buttonML, 2);
         ProjectMyBeat.Buttons.resetColor(ProjectMyBeat.buttonMR, 2);
         ProjectMyBeat.Buttons.resetColor(ProjectMyBeat.buttonR, 1);
-        viewport.draw();
     }
 })(ProjectMyBeat || (ProjectMyBeat = {}));
 //# sourceMappingURL=Main.js.map
