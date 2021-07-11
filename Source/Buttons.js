@@ -1,28 +1,23 @@
 "use strict";
 var ProjectMyBeat;
 (function (ProjectMyBeat) {
+    let materialOuterPressed = new ProjectMyBeat.f.Material("MaterialOuterPressed", ProjectMyBeat.f.ShaderUniColor, new ProjectMyBeat.f.CoatColored(new ProjectMyBeat.f.Color(1, 0, 0, 0.7)));
+    let materialInnerPressed = new ProjectMyBeat.f.Material("MaterialInnerPressed", ProjectMyBeat.f.ShaderUniColor, new ProjectMyBeat.f.CoatColored(new ProjectMyBeat.f.Color(0, 0, 1, 0.7)));
+    let materialOuter = new ProjectMyBeat.f.Material("MaterialOuter", ProjectMyBeat.f.ShaderUniColor, new ProjectMyBeat.f.CoatColored(new ProjectMyBeat.f.Color(1, 0, 0, 1)));
+    let materialInner = new ProjectMyBeat.f.Material("MaterialInner", ProjectMyBeat.f.ShaderUniColor, new ProjectMyBeat.f.CoatColored(new ProjectMyBeat.f.Color(0, 0, 1, 1)));
     class Buttons extends ProjectMyBeat.f.Node {
         constructor(_name, _material, _pos) {
             super(_name);
-            this.materialOuter = new ProjectMyBeat.f.Material("MaterialOuter", ProjectMyBeat.f.ShaderUniColor, new ProjectMyBeat.f.CoatColored(new ProjectMyBeat.f.Color(1, 0, 0, 1)));
-            this.materialInner = new ProjectMyBeat.f.Material("MaterialInner", ProjectMyBeat.f.ShaderUniColor, new ProjectMyBeat.f.CoatColored(new ProjectMyBeat.f.Color(0, 0, 1, 1)));
             this.mesh = new ProjectMyBeat.f.MeshQuad("Quad");
-            this.cmpMesh = new ProjectMyBeat.f.ComponentMesh(this.mesh);
-            this.pos0 = 0;
-            this.pos1 = 150;
-            this.pos2 = 300;
-            this.pos3 = 450;
-            this.posY = 900;
-            this.scaleX = 140;
-            this.scaleY = 50;
+            this.pos0 = -1.1;
+            this.pos1 = -0.4;
+            this.pos2 = 0.4;
+            this.pos3 = 1.1;
+            this.posY = -2.2;
+            this.scaleX = 0.6;
+            this.scaleY = 0.3;
+            //position and rect
             this.addComponent(new ProjectMyBeat.f.ComponentTransform());
-            this.addComponent(this.cmpMesh);
-            if (_material == 1) {
-                this.addComponent(new ProjectMyBeat.f.ComponentMaterial(this.materialOuter));
-            }
-            else if (_material == 2) {
-                this.addComponent(new ProjectMyBeat.f.ComponentMaterial(this.materialInner));
-            }
             switch (_pos) {
                 case 0:
                     this.mtxLocal.translateX(this.pos0);
@@ -42,8 +37,40 @@ var ProjectMyBeat;
                     break;
             }
             this.mtxLocal.translateY(this.posY);
-            this.cmpMesh.mtxPivot.scaleX(this.scaleX);
-            this.cmpMesh.mtxPivot.scaleY(this.scaleY);
+            //mesh and scale
+            let cmpMesh = new ProjectMyBeat.f.ComponentMesh(this.mesh);
+            cmpMesh.mtxPivot.scaleX(this.scaleX);
+            cmpMesh.mtxPivot.scaleY(this.scaleY);
+            this.addComponent(cmpMesh);
+            //material
+            if (_material == 1) {
+                this.addComponent(new ProjectMyBeat.f.ComponentMaterial(materialOuter));
+            }
+            else if (_material == 2) {
+                this.addComponent(new ProjectMyBeat.f.ComponentMaterial(materialInner));
+            }
+        }
+        /*
+        public checkCollision(_target: Arrow): boolean{
+            return this.rect.collides(_target.rect);
+        }*/
+        static pressingKey(_target, color) {
+            _target.removeComponent(_target.getComponent(ProjectMyBeat.f.ComponentMaterial));
+            if (color == 1) {
+                _target.addComponent(new ProjectMyBeat.f.ComponentMaterial(materialOuterPressed));
+            }
+            else {
+                _target.addComponent(new ProjectMyBeat.f.ComponentMaterial(materialInnerPressed));
+            }
+        }
+        static resetColor(_target, color) {
+            _target.removeComponent(_target.getComponent(ProjectMyBeat.f.ComponentMaterial));
+            if (color == 1) {
+                _target.addComponent(new ProjectMyBeat.f.ComponentMaterial(materialOuter));
+            }
+            else {
+                _target.addComponent(new ProjectMyBeat.f.ComponentMaterial(materialInner));
+            }
         }
     }
     ProjectMyBeat.Buttons = Buttons;

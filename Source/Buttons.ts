@@ -1,27 +1,24 @@
 namespace ProjectMyBeat {
+    let materialOuterPressed: f.Material = new f.Material("MaterialOuterPressed", f.ShaderUniColor, new f.CoatColored(new f.Color(1, 0, 0, 0.7)));
+    let materialInnerPressed: f.Material = new f.Material("MaterialInnerPressed", f.ShaderUniColor, new f.CoatColored(new f.Color(0, 0, 1, 0.7)));
+    let materialOuter: f.Material = new f.Material("MaterialOuter", f.ShaderUniColor, new f.CoatColored(new f.Color(1, 0, 0, 1)));
+    let materialInner: f.Material = new f.Material("MaterialInner", f.ShaderUniColor, new f.CoatColored(new f.Color(0, 0, 1, 1)));
     export class Buttons extends f.Node {
-        private materialOuter: f.Material = new f.Material("MaterialOuter", f.ShaderUniColor, new f.CoatColored(new f.Color(1, 0, 0, 1)));
-        private materialInner: f.Material = new f.Material("MaterialInner", f.ShaderUniColor, new f.CoatColored(new f.Color(0, 0, 1, 1)));
         private mesh: f.Mesh = new f.MeshQuad("Quad");
-        private cmpMesh: f.ComponentMesh = new f.ComponentMesh(this.mesh);
         private rect: f.Rectangle;
-        private pos0: number = 0;
-        private pos1: number = 150;
-        private pos2: number = 300;
-        private pos3: number = 450;
-        private posY: number = 900;
-        private scaleX: number = 140;
-        private scaleY: number = 50;
+        private pos0: number = -1.1;
+        private pos1: number = -0.4;
+        private pos2: number = 0.4;
+        private pos3: number = 1.1;
+        private posY: number = -2.2;
+        private scaleX: number = 0.6;
+        private scaleY: number = 0.3;
 
         constructor(_name: string, _material: number, _pos: number) {
             super(_name);
+
+            //position and rect
             this.addComponent(new f.ComponentTransform());
-            this.addComponent(this.cmpMesh);
-            if (_material == 1) {
-                this.addComponent(new f.ComponentMaterial(this.materialOuter));
-            } else if (_material == 2) {
-                this.addComponent(new f.ComponentMaterial(this.materialInner));
-            }
             switch (_pos) {
                 case 0:
                     this.mtxLocal.translateX(this.pos0);
@@ -41,12 +38,41 @@ namespace ProjectMyBeat {
                     break;
             }
             this.mtxLocal.translateY(this.posY);
-            this.cmpMesh.mtxPivot.scaleX(this.scaleX);
-            this.cmpMesh.mtxPivot.scaleY(this.scaleY);
+
+            //mesh and scale
+            let cmpMesh: f.ComponentMesh = new f.ComponentMesh(this.mesh);
+            cmpMesh.mtxPivot.scaleX(this.scaleX);
+            cmpMesh.mtxPivot.scaleY(this.scaleY);
+            this.addComponent(cmpMesh);
+
+            //material
+            if (_material == 1) {
+                this.addComponent(new f.ComponentMaterial(materialOuter));
+            } else if (_material == 2) {
+                this.addComponent(new f.ComponentMaterial(materialInner));
+            }
         }
         /*
         public checkCollision(_target: Arrow): boolean{
             return this.rect.collides(_target.rect);
         }*/
+
+        static pressingKey(_target: Buttons, color: number): void {
+            _target.removeComponent(_target.getComponent(f.ComponentMaterial));
+            if (color == 1) {
+                _target.addComponent(new f.ComponentMaterial(materialOuterPressed));
+            } else {
+                _target.addComponent(new f.ComponentMaterial(materialInnerPressed));
+            }
+        }
+
+        static resetColor(_target: Buttons, color: number): void {
+            _target.removeComponent(_target.getComponent(f.ComponentMaterial));
+            if (color == 1) {
+                _target.addComponent(new f.ComponentMaterial(materialOuter));
+            } else {
+                _target.addComponent(new f.ComponentMaterial(materialInner));
+            }
+        }
     }
 }
