@@ -52,11 +52,6 @@ namespace ProjectMyBeat {
                 this.addComponent(new f.ComponentMaterial(materialInner));
             }
         }
-        /*
-        public checkCollision(_target: Arrow): boolean{
-            return this.rect.collides(_target.rect);
-        }*/
-
         static pressingKey(_target: Buttons, color: number): void {
             _target.removeComponent(_target.getComponent(f.ComponentMaterial));
             if (color == 1) {
@@ -74,5 +69,11 @@ namespace ProjectMyBeat {
                 _target.addComponent(new f.ComponentMaterial(materialInner));
             }
         }
+
+
+        public checkCollision(_target: Notes): boolean {
+            return this.rect.collides(_target.rect);
+        }
     }
+
 }

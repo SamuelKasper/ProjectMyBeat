@@ -53,6 +53,7 @@ namespace ProjectMyBeat {
     function update(_event: Event): void {
         checkKeys();
         resetKeys();
+        checkCollision();
         for (let notes of noteNode.getChildren() as Notes[]) {
             Notes.moveDown(notes);
             if (notes.mtxLocal.translation.y < -2) {
@@ -81,6 +82,22 @@ namespace ProjectMyBeat {
         Buttons.resetColor(buttonR, 1);
     }
 
+    function checkCollision(): void {
+        for (let notes of noteNode.getChildren() as Notes[]) {
+            if (buttonL.checkCollision(notes)) {
+                console.log("collisionL");
+            }
+            if (buttonML.checkCollision(notes)) {
+                console.log("collisionML");
+            }
+            if (buttonMR.checkCollision(notes)) {
+                console.log("collisionMR");
+            }
+            if (buttonR.checkCollision(notes)) {
+                console.log("collisionR");
+            }
+        }
+    }
 
 
 }

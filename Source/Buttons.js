@@ -50,10 +50,6 @@ var ProjectMyBeat;
                 this.addComponent(new ProjectMyBeat.f.ComponentMaterial(ProjectMyBeat.materialInner));
             }
         }
-        /*
-        public checkCollision(_target: Arrow): boolean{
-            return this.rect.collides(_target.rect);
-        }*/
         static pressingKey(_target, color) {
             _target.removeComponent(_target.getComponent(ProjectMyBeat.f.ComponentMaterial));
             if (color == 1) {
@@ -71,6 +67,9 @@ var ProjectMyBeat;
             else {
                 _target.addComponent(new ProjectMyBeat.f.ComponentMaterial(ProjectMyBeat.materialInner));
             }
+        }
+        checkCollision(_target) {
+            return this.rect.collides(_target.rect);
         }
     }
     ProjectMyBeat.Buttons = Buttons;

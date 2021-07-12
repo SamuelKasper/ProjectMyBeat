@@ -1,7 +1,7 @@
 namespace ProjectMyBeat {
     export class Notes extends f.Node {
+        public rect: f.Rectangle;
         private mesh: f.Mesh = new f.MeshQuad("Quad");
-        private rect: f.Rectangle;
         private posY: number = 2;
         private scaleX: number = 0.6;
         private scaleY: number = 0.3;

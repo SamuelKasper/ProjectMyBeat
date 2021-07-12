@@ -44,6 +44,7 @@ var ProjectMyBeat;
     function update(_event) {
         checkKeys();
         resetKeys();
+        checkCollision();
         for (let notes of ProjectMyBeat.noteNode.getChildren()) {
             ProjectMyBeat.Notes.moveDown(notes);
             if (notes.mtxLocal.translation.y < -2) {
@@ -71,6 +72,22 @@ var ProjectMyBeat;
         ProjectMyBeat.Buttons.resetColor(ProjectMyBeat.buttonML, 2);
         ProjectMyBeat.Buttons.resetColor(ProjectMyBeat.buttonMR, 2);
         ProjectMyBeat.Buttons.resetColor(ProjectMyBeat.buttonR, 1);
+    }
+    function checkCollision() {
+        for (let notes of ProjectMyBeat.noteNode.getChildren()) {
+            if (ProjectMyBeat.buttonL.checkCollision(notes)) {
+                console.log("collisionL");
+            }
+            if (ProjectMyBeat.buttonML.checkCollision(notes)) {
+                console.log("collisionML");
+            }
+            if (ProjectMyBeat.buttonMR.checkCollision(notes)) {
+                console.log("collisionMR");
+            }
+            if (ProjectMyBeat.buttonR.checkCollision(notes)) {
+                console.log("collisionR");
+            }
+        }
     }
 })(ProjectMyBeat || (ProjectMyBeat = {}));
 //# sourceMappingURL=Main.js.map
