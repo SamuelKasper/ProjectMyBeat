@@ -1,10 +1,10 @@
 "use strict";
 var ProjectMyBeat;
 (function (ProjectMyBeat) {
-    let materialOuterPressed = new ProjectMyBeat.f.Material("MaterialOuterPressed", ProjectMyBeat.f.ShaderUniColor, new ProjectMyBeat.f.CoatColored(new ProjectMyBeat.f.Color(1, 0, 0, 0.7)));
-    let materialInnerPressed = new ProjectMyBeat.f.Material("MaterialInnerPressed", ProjectMyBeat.f.ShaderUniColor, new ProjectMyBeat.f.CoatColored(new ProjectMyBeat.f.Color(0, 0, 1, 0.7)));
-    let materialOuter = new ProjectMyBeat.f.Material("MaterialOuter", ProjectMyBeat.f.ShaderUniColor, new ProjectMyBeat.f.CoatColored(new ProjectMyBeat.f.Color(1, 0, 0, 1)));
-    let materialInner = new ProjectMyBeat.f.Material("MaterialInner", ProjectMyBeat.f.ShaderUniColor, new ProjectMyBeat.f.CoatColored(new ProjectMyBeat.f.Color(0, 0, 1, 1)));
+    ProjectMyBeat.materialOuterPressed = new ProjectMyBeat.f.Material("MaterialOuterPressed", ProjectMyBeat.f.ShaderUniColor, new ProjectMyBeat.f.CoatColored(new ProjectMyBeat.f.Color(1, 0, 0, 0.7)));
+    ProjectMyBeat.materialInnerPressed = new ProjectMyBeat.f.Material("MaterialInnerPressed", ProjectMyBeat.f.ShaderUniColor, new ProjectMyBeat.f.CoatColored(new ProjectMyBeat.f.Color(0, 0, 1, 0.7)));
+    ProjectMyBeat.materialOuter = new ProjectMyBeat.f.Material("MaterialOuter", ProjectMyBeat.f.ShaderUniColor, new ProjectMyBeat.f.CoatColored(new ProjectMyBeat.f.Color(1, 0, 0, 1)));
+    ProjectMyBeat.materialInner = new ProjectMyBeat.f.Material("MaterialInner", ProjectMyBeat.f.ShaderUniColor, new ProjectMyBeat.f.CoatColored(new ProjectMyBeat.f.Color(0, 0, 1, 1)));
     ProjectMyBeat.pos0 = -1.1;
     ProjectMyBeat.pos1 = -0.4;
     ProjectMyBeat.pos2 = 0.4;
@@ -44,10 +44,10 @@ var ProjectMyBeat;
             this.addComponent(cmpMesh);
             //material
             if (_material == 1) {
-                this.addComponent(new ProjectMyBeat.f.ComponentMaterial(materialOuter));
+                this.addComponent(new ProjectMyBeat.f.ComponentMaterial(ProjectMyBeat.materialOuter));
             }
             else if (_material == 2) {
-                this.addComponent(new ProjectMyBeat.f.ComponentMaterial(materialInner));
+                this.addComponent(new ProjectMyBeat.f.ComponentMaterial(ProjectMyBeat.materialInner));
             }
         }
         /*
@@ -57,19 +57,19 @@ var ProjectMyBeat;
         static pressingKey(_target, color) {
             _target.removeComponent(_target.getComponent(ProjectMyBeat.f.ComponentMaterial));
             if (color == 1) {
-                _target.addComponent(new ProjectMyBeat.f.ComponentMaterial(materialOuterPressed));
+                _target.addComponent(new ProjectMyBeat.f.ComponentMaterial(ProjectMyBeat.materialOuterPressed));
             }
             else {
-                _target.addComponent(new ProjectMyBeat.f.ComponentMaterial(materialInnerPressed));
+                _target.addComponent(new ProjectMyBeat.f.ComponentMaterial(ProjectMyBeat.materialInnerPressed));
             }
         }
         static resetColor(_target, color) {
             _target.removeComponent(_target.getComponent(ProjectMyBeat.f.ComponentMaterial));
             if (color == 1) {
-                _target.addComponent(new ProjectMyBeat.f.ComponentMaterial(materialOuter));
+                _target.addComponent(new ProjectMyBeat.f.ComponentMaterial(ProjectMyBeat.materialOuter));
             }
             else {
-                _target.addComponent(new ProjectMyBeat.f.ComponentMaterial(materialInner));
+                _target.addComponent(new ProjectMyBeat.f.ComponentMaterial(ProjectMyBeat.materialInner));
             }
         }
     }

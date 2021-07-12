@@ -9,7 +9,7 @@ namespace ProjectMyBeat {
     export let buttonMR: Buttons;
     export let buttonR: Buttons;
     export let startBtn: HTMLButtonElement;
-    //export let testNode: f.Node;
+    export let noteNode: f.Node = new f.Node("Notes");
 
     async function init(_event: Event): Promise<void> {
         const canvas: HTMLCanvasElement = document.querySelector("canvas");
@@ -32,6 +32,7 @@ namespace ProjectMyBeat {
 
         //add to root
         rootNode.addChild(buttonNode);
+        rootNode.addChild(noteNode);
         console.log(rootNode);
 
         //viewport
@@ -52,6 +53,12 @@ namespace ProjectMyBeat {
     function update(_event: Event): void {
         checkKeys();
         resetKeys();
+        for (let notes of noteNode.getChildren() as Notes[]) {
+            Notes.moveDown(notes);
+            if (notes.mtxLocal.translation.y < -2) {
+                noteNode.removeChild(notes);
+            }
+        }
     }
 
     function checkKeys(): void {
@@ -73,5 +80,7 @@ namespace ProjectMyBeat {
         Buttons.resetColor(buttonMR, 2);
         Buttons.resetColor(buttonR, 1);
     }
+
+
 
 }

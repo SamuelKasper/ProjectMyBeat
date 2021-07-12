@@ -1,8 +1,8 @@
 namespace ProjectMyBeat {
-    let materialOuterPressed: f.Material = new f.Material("MaterialOuterPressed", f.ShaderUniColor, new f.CoatColored(new f.Color(1, 0, 0, 0.7)));
-    let materialInnerPressed: f.Material = new f.Material("MaterialInnerPressed", f.ShaderUniColor, new f.CoatColored(new f.Color(0, 0, 1, 0.7)));
-    let materialOuter: f.Material = new f.Material("MaterialOuter", f.ShaderUniColor, new f.CoatColored(new f.Color(1, 0, 0, 1)));
-    let materialInner: f.Material = new f.Material("MaterialInner", f.ShaderUniColor, new f.CoatColored(new f.Color(0, 0, 1, 1)));
+    export let materialOuterPressed: f.Material = new f.Material("MaterialOuterPressed", f.ShaderUniColor, new f.CoatColored(new f.Color(1, 0, 0, 0.7)));
+    export let materialInnerPressed: f.Material = new f.Material("MaterialInnerPressed", f.ShaderUniColor, new f.CoatColored(new f.Color(0, 0, 1, 0.7)));
+    export let materialOuter: f.Material = new f.Material("MaterialOuter", f.ShaderUniColor, new f.CoatColored(new f.Color(1, 0, 0, 1)));
+    export let materialInner: f.Material = new f.Material("MaterialInner", f.ShaderUniColor, new f.CoatColored(new f.Color(0, 0, 1, 1)));
     export let pos0: number = -1.1;
     export let pos1: number = -0.4;
     export let pos2: number = 0.4;

@@ -12,6 +12,7 @@ namespace ProjectMyBeat {
     let nowPLaying: SongProperties;
     let secondsPerBeat: number = 0;
     let beat: number = 0;
+    let note: Notes;
     export class Songs {
         public constructor() {
             //Arcade
@@ -50,7 +51,15 @@ namespace ProjectMyBeat {
             } else if (beat >= 3) {
                 f.Time.game.setTimer(secondsPerBeat * 999, 1, this.testEventOnBeat);
                 beat = 0;
+                this.createNote();
             }
+        }
+
+        public createNote(): void {
+            let rnd: number = f.Random.default.getRangeFloored(0, 4);
+            console.log(rnd);
+            note = new Notes("beat", rnd);
+            noteNode.addChild(note);
         }
     }
 }

@@ -6,7 +6,7 @@ var ProjectMyBeat;
     let viewport = new ProjectMyBeat.f.Viewport();
     ProjectMyBeat.rootNode = new ProjectMyBeat.f.Node("root");
     ProjectMyBeat.buttonNode = new ProjectMyBeat.f.Node("buttonNode");
-    //export let testNode: f.Node;
+    ProjectMyBeat.noteNode = new ProjectMyBeat.f.Node("Notes");
     async function init(_event) {
         const canvas = document.querySelector("canvas");
         let cam = new ProjectMyBeat.f.ComponentCamera();
@@ -26,6 +26,7 @@ var ProjectMyBeat;
         ProjectMyBeat.buttonNode.addChild(ProjectMyBeat.buttonR);
         //add to root
         ProjectMyBeat.rootNode.addChild(ProjectMyBeat.buttonNode);
+        ProjectMyBeat.rootNode.addChild(ProjectMyBeat.noteNode);
         console.log(ProjectMyBeat.rootNode);
         //viewport
         viewport.initialize("Viewport", ProjectMyBeat.rootNode, cam, canvas);
@@ -43,6 +44,12 @@ var ProjectMyBeat;
     function update(_event) {
         checkKeys();
         resetKeys();
+        for (let notes of ProjectMyBeat.noteNode.getChildren()) {
+            ProjectMyBeat.Notes.moveDown(notes);
+            if (notes.mtxLocal.translation.y < -2) {
+                ProjectMyBeat.noteNode.removeChild(notes);
+            }
+        }
     }
     function checkKeys() {
         if (ProjectMyBeat.f.Keyboard.isPressedOne([ProjectMyBeat.f.KEYBOARD_CODE.D])) {

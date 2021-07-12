@@ -4,6 +4,7 @@ var ProjectMyBeat;
     let nowPLaying;
     let secondsPerBeat = 0;
     let beat = 0;
+    let note;
     class Songs {
         constructor() {
             this.testEventOnBeat = () => {
@@ -15,6 +16,7 @@ var ProjectMyBeat;
                 else if (beat >= 3) {
                     ProjectMyBeat.f.Time.game.setTimer(secondsPerBeat * 999, 1, this.testEventOnBeat);
                     beat = 0;
+                    this.createNote();
                 }
             };
             //Arcade
@@ -39,6 +41,12 @@ var ProjectMyBeat;
         }
         getSongInfo(song) {
             console.log("Name:" + song.name + "\nBpm:" + song.bpm + "\nLength:" + song.lengthInSec + "\nScore:" + song.score);
+        }
+        createNote() {
+            let rnd = ProjectMyBeat.f.Random.default.getRangeFloored(0, 4);
+            console.log(rnd);
+            note = new ProjectMyBeat.Notes("beat", rnd);
+            ProjectMyBeat.noteNode.addChild(note);
         }
     }
     ProjectMyBeat.Songs = Songs;
