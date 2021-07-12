@@ -6,7 +6,12 @@ namespace ProjectMyBeat {
         lengthInSec: number;
         score: number;
     }
+    //Songs
     export let arcade: SongProperties;
+
+    let nowPLaying: SongProperties;
+    let secondsPerBeat: number = 0;
+    let beat: number = 0;
     export class Songs {
         public constructor() {
             //Arcade
@@ -15,11 +20,37 @@ namespace ProjectMyBeat {
 
         //Music playing
         public playMusic(): void {
+            //specific arcade
             let compAudio: f.ComponentAudio = new f.ComponentAudio(arcade.audio, false, true);
-            console.log("Name:" + arcade.name + "\nBpm:" + arcade.bpm + "\nLength:" + arcade.lengthInSec + "\nScore:" + arcade.score);
+            nowPLaying = arcade;
+
+            //general
+            this.getSPB(nowPLaying);
+            this.getSongInfo(nowPLaying);
             compAudio.connect(true);
             compAudio.volume = 0.5;
             compAudio.play(true);
+            this.testEventOnBeat();
+        }
+
+        public getSPB(song: SongProperties): void {
+            secondsPerBeat = 60 / song.bpm;
+            console.log("SPB: " + secondsPerBeat);
+        }
+
+        public getSongInfo(song: SongProperties): void {
+            console.log("Name:" + song.name + "\nBpm:" + song.bpm + "\nLength:" + song.lengthInSec + "\nScore:" + song.score);
+        }
+
+        public testEventOnBeat = (): void => {
+            console.log("BEAT" + beat);
+            if (beat < 3) {
+                f.Time.game.setTimer(secondsPerBeat * 1000, 1, this.testEventOnBeat);
+                beat++;
+            } else if (beat >= 3) {
+                f.Time.game.setTimer(secondsPerBeat * 999, 1, this.testEventOnBeat);
+                beat = 0;
+            }
         }
     }
 }
