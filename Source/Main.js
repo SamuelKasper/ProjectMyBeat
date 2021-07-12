@@ -30,9 +30,15 @@ var ProjectMyBeat;
         //viewport
         viewport.initialize("Viewport", ProjectMyBeat.rootNode, cam, canvas);
         viewport.draw();
-        //start loop
+        ProjectMyBeat.startBtn = document.getElementById("start");
+        ProjectMyBeat.startBtn.addEventListener("click", startLoop);
+    }
+    function startLoop() {
+        let songs = new ProjectMyBeat.Songs();
+        songs.playMusic();
         ProjectMyBeat.f.Loop.start(ProjectMyBeat.f.LOOP_MODE.TIME_REAL, 60);
         ProjectMyBeat.f.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, update);
+        ProjectMyBeat.startBtn.disabled = true;
     }
     function update(_event) {
         checkKeys();

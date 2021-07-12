@@ -5,35 +5,35 @@ var ProjectMyBeat;
     let materialInnerPressed = new ProjectMyBeat.f.Material("MaterialInnerPressed", ProjectMyBeat.f.ShaderUniColor, new ProjectMyBeat.f.CoatColored(new ProjectMyBeat.f.Color(0, 0, 1, 0.7)));
     let materialOuter = new ProjectMyBeat.f.Material("MaterialOuter", ProjectMyBeat.f.ShaderUniColor, new ProjectMyBeat.f.CoatColored(new ProjectMyBeat.f.Color(1, 0, 0, 1)));
     let materialInner = new ProjectMyBeat.f.Material("MaterialInner", ProjectMyBeat.f.ShaderUniColor, new ProjectMyBeat.f.CoatColored(new ProjectMyBeat.f.Color(0, 0, 1, 1)));
+    ProjectMyBeat.pos0 = -1.1;
+    ProjectMyBeat.pos1 = -0.4;
+    ProjectMyBeat.pos2 = 0.4;
+    ProjectMyBeat.pos3 = 1.1;
     class Buttons extends ProjectMyBeat.f.Node {
         constructor(_name, _material, _pos) {
             super(_name);
             this.mesh = new ProjectMyBeat.f.MeshQuad("Quad");
-            this.pos0 = -1.1;
-            this.pos1 = -0.4;
-            this.pos2 = 0.4;
-            this.pos3 = 1.1;
-            this.posY = -2.2;
+            this.posY = -2;
             this.scaleX = 0.6;
             this.scaleY = 0.3;
             //position and rect
             this.addComponent(new ProjectMyBeat.f.ComponentTransform());
             switch (_pos) {
                 case 0:
-                    this.mtxLocal.translateX(this.pos0);
-                    this.rect = new ProjectMyBeat.f.Rectangle(this.pos0, this.posY, this.scaleX, this.scaleY, ProjectMyBeat.f.ORIGIN2D.CENTER);
+                    this.mtxLocal.translateX(ProjectMyBeat.pos0);
+                    this.rect = new ProjectMyBeat.f.Rectangle(ProjectMyBeat.pos0, this.posY, this.scaleX, this.scaleY, ProjectMyBeat.f.ORIGIN2D.CENTER);
                     break;
                 case 1:
-                    this.mtxLocal.translateX(this.pos1);
-                    this.rect = new ProjectMyBeat.f.Rectangle(this.pos1, this.posY, this.scaleX, this.scaleY, ProjectMyBeat.f.ORIGIN2D.CENTER);
+                    this.mtxLocal.translateX(ProjectMyBeat.pos1);
+                    this.rect = new ProjectMyBeat.f.Rectangle(ProjectMyBeat.pos1, this.posY, this.scaleX, this.scaleY, ProjectMyBeat.f.ORIGIN2D.CENTER);
                     break;
                 case 2:
-                    this.mtxLocal.translateX(this.pos2);
-                    this.rect = new ProjectMyBeat.f.Rectangle(this.pos2, this.posY, this.scaleX, this.scaleY, ProjectMyBeat.f.ORIGIN2D.CENTER);
+                    this.mtxLocal.translateX(ProjectMyBeat.pos2);
+                    this.rect = new ProjectMyBeat.f.Rectangle(ProjectMyBeat.pos2, this.posY, this.scaleX, this.scaleY, ProjectMyBeat.f.ORIGIN2D.CENTER);
                     break;
                 case 3:
-                    this.mtxLocal.translateX(this.pos3);
-                    this.rect = new ProjectMyBeat.f.Rectangle(this.pos3, this.posY, this.scaleX, this.scaleY, ProjectMyBeat.f.ORIGIN2D.CENTER);
+                    this.mtxLocal.translateX(ProjectMyBeat.pos3);
+                    this.rect = new ProjectMyBeat.f.Rectangle(ProjectMyBeat.pos3, this.posY, this.scaleX, this.scaleY, ProjectMyBeat.f.ORIGIN2D.CENTER);
                     break;
             }
             this.mtxLocal.translateY(this.posY);

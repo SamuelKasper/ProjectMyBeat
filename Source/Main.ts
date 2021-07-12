@@ -8,6 +8,7 @@ namespace ProjectMyBeat {
     export let buttonML: Buttons;
     export let buttonMR: Buttons;
     export let buttonR: Buttons;
+    export let startBtn: HTMLButtonElement;
     //export let testNode: f.Node;
 
     async function init(_event: Event): Promise<void> {
@@ -36,10 +37,16 @@ namespace ProjectMyBeat {
         //viewport
         viewport.initialize("Viewport", rootNode, cam, canvas);
         viewport.draw();
+        startBtn = <HTMLButtonElement>document.getElementById("start");
+        startBtn.addEventListener("click", startLoop);
+    }
 
-        //start loop
+    function startLoop(): void {
+        let songs: Songs = new Songs();
+        songs.playMusic();
         f.Loop.start(f.LOOP_MODE.TIME_REAL, 60);
         f.Loop.addEventListener(f.EVENT.LOOP_FRAME, update);
+        startBtn.disabled = true;
     }
 
     function update(_event: Event): void {

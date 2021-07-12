@@ -3,14 +3,14 @@ namespace ProjectMyBeat {
     let materialInnerPressed: f.Material = new f.Material("MaterialInnerPressed", f.ShaderUniColor, new f.CoatColored(new f.Color(0, 0, 1, 0.7)));
     let materialOuter: f.Material = new f.Material("MaterialOuter", f.ShaderUniColor, new f.CoatColored(new f.Color(1, 0, 0, 1)));
     let materialInner: f.Material = new f.Material("MaterialInner", f.ShaderUniColor, new f.CoatColored(new f.Color(0, 0, 1, 1)));
+    export let pos0: number = -1.1;
+    export let pos1: number = -0.4;
+    export let pos2: number = 0.4;
+    export let pos3: number = 1.1;
     export class Buttons extends f.Node {
         private mesh: f.Mesh = new f.MeshQuad("Quad");
         private rect: f.Rectangle;
-        private pos0: number = -1.1;
-        private pos1: number = -0.4;
-        private pos2: number = 0.4;
-        private pos3: number = 1.1;
-        private posY: number = -2.2;
+        private posY: number = -2;
         private scaleX: number = 0.6;
         private scaleY: number = 0.3;
 
@@ -21,20 +21,20 @@ namespace ProjectMyBeat {
             this.addComponent(new f.ComponentTransform());
             switch (_pos) {
                 case 0:
-                    this.mtxLocal.translateX(this.pos0);
-                    this.rect = new f.Rectangle(this.pos0, this.posY, this.scaleX, this.scaleY, f.ORIGIN2D.CENTER);
+                    this.mtxLocal.translateX(pos0);
+                    this.rect = new f.Rectangle(pos0, this.posY, this.scaleX, this.scaleY, f.ORIGIN2D.CENTER);
                     break;
                 case 1:
-                    this.mtxLocal.translateX(this.pos1);
-                    this.rect = new f.Rectangle(this.pos1, this.posY, this.scaleX, this.scaleY, f.ORIGIN2D.CENTER);
+                    this.mtxLocal.translateX(pos1);
+                    this.rect = new f.Rectangle(pos1, this.posY, this.scaleX, this.scaleY, f.ORIGIN2D.CENTER);
                     break;
                 case 2:
-                    this.mtxLocal.translateX(this.pos2);
-                    this.rect = new f.Rectangle(this.pos2, this.posY, this.scaleX, this.scaleY, f.ORIGIN2D.CENTER);
+                    this.mtxLocal.translateX(pos2);
+                    this.rect = new f.Rectangle(pos2, this.posY, this.scaleX, this.scaleY, f.ORIGIN2D.CENTER);
                     break;
                 case 3:
-                    this.mtxLocal.translateX(this.pos3);
-                    this.rect = new f.Rectangle(this.pos3, this.posY, this.scaleX, this.scaleY, f.ORIGIN2D.CENTER);
+                    this.mtxLocal.translateX(pos3);
+                    this.rect = new f.Rectangle(pos3, this.posY, this.scaleX, this.scaleY, f.ORIGIN2D.CENTER);
                     break;
             }
             this.mtxLocal.translateY(this.posY);
