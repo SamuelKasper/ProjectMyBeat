@@ -43,7 +43,7 @@ namespace ProjectMyBeat {
         }
 
         public static moveDown(note: Notes): void {
-            note.mtxLocal.translateY(-0.01);
+            note.mtxLocal.translateY(-0.02);
         }
 
         public static updateRect(note: Notes): void {

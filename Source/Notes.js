@@ -42,7 +42,7 @@ var ProjectMyBeat;
             }
         }
         static moveDown(note) {
-            note.mtxLocal.translateY(-0.01);
+            note.mtxLocal.translateY(-0.02);
         }
         static updateRect(note) {
             note.rect.position.x = note.mtxLocal.translation.x - note.rect.size.x / 2;
