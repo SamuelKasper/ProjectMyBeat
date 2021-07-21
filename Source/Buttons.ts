@@ -7,6 +7,8 @@ namespace ProjectMyBeat {
     export let pos1: number = -0.4;
     export let pos2: number = 0.4;
     export let pos3: number = 1.1;
+    export let isPressed: boolean = false;
+
     export class Buttons extends f.Node {
         private mesh: f.Mesh = new f.MeshQuad("Quad");
         private rect: f.Rectangle;
@@ -69,7 +71,6 @@ namespace ProjectMyBeat {
                 _target.addComponent(new f.ComponentMaterial(materialInner));
             }
         }
-
 
         public checkCollision(_target: Notes): boolean {
             return this.rect.collides(_target.rect);

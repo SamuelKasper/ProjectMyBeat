@@ -10,6 +10,10 @@ namespace ProjectMyBeat {
     export let buttonR: Buttons;
     export let startBtn: HTMLButtonElement;
     export let noteNode: f.Node = new f.Node("Notes");
+    let displayScore: HTMLParagraphElement;
+    let displayCombo: HTMLParagraphElement;
+    let score: number = 0;
+    let combo: number = 1;
 
     async function init(_event: Event): Promise<void> {
         const canvas: HTMLCanvasElement = document.querySelector("canvas");
@@ -18,7 +22,6 @@ namespace ProjectMyBeat {
         cam.mtxPivot.translateY(0);
         cam.mtxPivot.translateX(0);
         cam.mtxPivot.rotateY(180);
-        //cam.clrBackground = f.Color.CSS("white");
 
         //create Buttons
         buttonL = new Buttons("buttonL", 1, 0);
@@ -34,6 +37,10 @@ namespace ProjectMyBeat {
         rootNode.addChild(buttonNode);
         rootNode.addChild(noteNode);
         console.log(rootNode);
+
+        //score element
+        displayScore = <HTMLParagraphElement>document.getElementById("score");
+        displayCombo = <HTMLParagraphElement>document.getElementById("combo");
 
         //viewport
         viewport.initialize("Viewport", rootNode, cam, canvas);
@@ -53,10 +60,12 @@ namespace ProjectMyBeat {
     function update(_event: Event): void {
         checkKeys();
         resetKeys();
-        checkCollision();
         for (let notes of noteNode.getChildren() as Notes[]) {
             Notes.moveDown(notes);
+            Notes.updateRect(notes);
             if (notes.mtxLocal.translation.y < -2) {
+                combo = 1;
+                displayCombo.innerHTML = "Combo: " + combo;
                 noteNode.removeChild(notes);
             }
         }
@@ -65,12 +74,16 @@ namespace ProjectMyBeat {
     function checkKeys(): void {
         if (f.Keyboard.isPressedOne([f.KEYBOARD_CODE.D])) {
             Buttons.pressingKey(buttonL, 1);
+            checkCollision(buttonL);
         } else if (f.Keyboard.isPressedOne([f.KEYBOARD_CODE.F])) {
             Buttons.pressingKey(buttonML, 2);
+            checkCollision(buttonML);
         } else if (f.Keyboard.isPressedOne([f.KEYBOARD_CODE.J])) {
             Buttons.pressingKey(buttonMR, 2);
+            checkCollision(buttonMR);
         } else if (f.Keyboard.isPressedOne([f.KEYBOARD_CODE.K])) {
             Buttons.pressingKey(buttonR, 1);
+            checkCollision(buttonR);
         }
         viewport.draw();
     }
@@ -82,22 +95,22 @@ namespace ProjectMyBeat {
         Buttons.resetColor(buttonR, 1);
     }
 
-    function checkCollision(): void {
+    function checkCollision(_button: Buttons): void {
         for (let notes of noteNode.getChildren() as Notes[]) {
-            if (buttonL.checkCollision(notes)) {
-                console.log("collisionL");
-            }
-            if (buttonML.checkCollision(notes)) {
-                console.log("collisionML");
-            }
-            if (buttonMR.checkCollision(notes)) {
-                console.log("collisionMR");
-            }
-            if (buttonR.checkCollision(notes)) {
-                console.log("collisionR");
+            if (_button.checkCollision(notes)) {
+                noteNode.removeChild(notes);
+                updateScore();
             }
         }
     }
 
+    function updateScore(): void {
+        combo += 0.1;
+        score = score + 1 * combo;
+        score = parseFloat(score.toFixed(2));
+        combo = parseFloat(combo.toFixed(2));
+        displayScore.innerHTML = "Score: " + score;
+        displayCombo.innerHTML = "Combo: " + combo;
+    }
 
 }

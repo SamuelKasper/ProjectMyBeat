@@ -9,6 +9,7 @@ var ProjectMyBeat;
     ProjectMyBeat.pos1 = -0.4;
     ProjectMyBeat.pos2 = 0.4;
     ProjectMyBeat.pos3 = 1.1;
+    ProjectMyBeat.isPressed = false;
     class Buttons extends ProjectMyBeat.f.Node {
         constructor(_name, _material, _pos) {
             super(_name);

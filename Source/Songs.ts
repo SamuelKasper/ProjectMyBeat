@@ -13,6 +13,7 @@ namespace ProjectMyBeat {
     let secondsPerBeat: number = 0;
     let beat: number = 0;
     let note: Notes;
+    let compAudio: f.ComponentAudio;
     export class Songs {
         public constructor() {
             //Arcade
@@ -22,7 +23,7 @@ namespace ProjectMyBeat {
         //Music playing
         public playMusic(): void {
             //specific arcade
-            let compAudio: f.ComponentAudio = new f.ComponentAudio(arcade.audio, false, true);
+            compAudio = new f.ComponentAudio(arcade.audio, false, true);
             nowPLaying = arcade;
 
             //general
@@ -51,7 +52,9 @@ namespace ProjectMyBeat {
             } else if (beat >= 3) {
                 f.Time.game.setTimer(secondsPerBeat * 999, 1, this.testEventOnBeat);
                 beat = 0;
-                this.createNote();
+                if (compAudio.isPlaying) {
+                    this.createNote();
+                }
             }
         }
 

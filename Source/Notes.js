@@ -44,6 +44,10 @@ var ProjectMyBeat;
         static moveDown(note) {
             note.mtxLocal.translateY(-0.01);
         }
+        static updateRect(note) {
+            note.rect.position.x = note.mtxLocal.translation.x - note.rect.size.x / 2;
+            note.rect.position.y = note.mtxLocal.translation.y - note.rect.size.y / 2;
+        }
     }
     ProjectMyBeat.Notes = Notes;
 })(ProjectMyBeat || (ProjectMyBeat = {}));

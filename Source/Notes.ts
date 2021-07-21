@@ -45,5 +45,10 @@ namespace ProjectMyBeat {
         public static moveDown(note: Notes): void {
             note.mtxLocal.translateY(-0.01);
         }
+
+        public static updateRect(note: Notes): void {
+            note.rect.position.x = note.mtxLocal.translation.x - note.rect.size.x / 2;
+            note.rect.position.y = note.mtxLocal.translation.y - note.rect.size.y / 2;
+        }
     }
 }

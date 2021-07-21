@@ -5,6 +5,7 @@ var ProjectMyBeat;
     let secondsPerBeat = 0;
     let beat = 0;
     let note;
+    let compAudio;
     class Songs {
         constructor() {
             this.testEventOnBeat = () => {
@@ -16,7 +17,9 @@ var ProjectMyBeat;
                 else if (beat >= 3) {
                     ProjectMyBeat.f.Time.game.setTimer(secondsPerBeat * 999, 1, this.testEventOnBeat);
                     beat = 0;
-                    this.createNote();
+                    if (compAudio.isPlaying) {
+                        this.createNote();
+                    }
                 }
             };
             //Arcade
@@ -25,7 +28,7 @@ var ProjectMyBeat;
         //Music playing
         playMusic() {
             //specific arcade
-            let compAudio = new ProjectMyBeat.f.ComponentAudio(ProjectMyBeat.arcade.audio, false, true);
+            compAudio = new ProjectMyBeat.f.ComponentAudio(ProjectMyBeat.arcade.audio, false, true);
             nowPLaying = ProjectMyBeat.arcade;
             //general
             this.getSPB(nowPLaying);
